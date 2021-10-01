@@ -109,15 +109,15 @@ public class Magpie
     // if it is found, and returns -1 otherwise. 
     public int findWord(String str, String word) {
         str = str.toLowerCase();
-        word = str.toLowerCase();
+        word = word.toLowerCase();
         int yes=-1;
-        if (str.indexOf(word)>0){
+        if(str.indexOf(word)!=-1){
             if((str.indexOf(word)==0
-            ||str.charAt(str.indexOf(word)-1)==' ') && (str.indexOf(word+word.length())==str.length()
-                    ||str.charAt(str.indexOf(word+word.length()))==' ')){
+            ||str.charAt(str.indexOf(word)-1)==' ') && (str.indexOf(word)+word.length()==str.length()
+                    ||str.charAt(str.indexOf(word)+word.length())==' ')){
             yes = str.indexOf(word);}
-            System.out.println(yes);
-    }return yes;}
+           }
+    return yes;}
 
     
     // We will work on the following methods later!
@@ -129,11 +129,14 @@ public class Magpie
      * @return the transformed statement
      */
     public String transformIWantStatement(String statement)
-    {
-        if (findWord(statement, "I want" )>0){
-            word=substringAt()
+    {statement = statement.toLowerCase();
+        String returnState = " ";
+        if (findWord(statement, "I want" )>=0){
+        int lastWord = statement.indexOf("I want") + 7;
+        String wanted = statement.substring(lastWord,statement.length());
+        returnState = "Would you really be happy if you had" + wanted + "?";
         }
-        return "";
+        return returnState;
     }
 
     /**
