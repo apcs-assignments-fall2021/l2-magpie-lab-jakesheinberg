@@ -18,7 +18,7 @@ public class Magpie
      */
     public String getGreeting()
     {
-        return "Hello, let's talk.";
+        return "Hello, whats up?";
     }
     
     /**
@@ -147,9 +147,16 @@ public class Magpie
      */
     public String transformIYouStatement(String statement)
     {
-        //your code here
-        return "";
-    }
+        statement = statement.toLowerCase();
+        String response = " ";
+        if (findWord(statement,"i")>=0 && findWord(statement,"you")>=0){
+                int lastWord = statement.indexOf("i") + 2;
+                int y = findWord(statement, "you");
+                String wanted = statement.substring(lastWord, y);
+                String finResponse = wanted.trim();
+                response = "Why do you " + finResponse + " me?";
+            }
+        return response;}
 
     /**
      * Take a statement with "I want to <something>." and transform it into 
@@ -159,9 +166,16 @@ public class Magpie
      */
     public String transformIWantToStatement(String statement)
     {
-        // your code here
-        return "";
+        statement = statement.toLowerCase();
+        String returnState = " ";
+        if (findWord(statement, "I want to" )>=0){
+            int lastWord = statement.indexOf("I want") + 10;
+            String wanted = statement.substring(lastWord);
+            returnState = "What would it mean to" + wanted + "?";
+        }
+        return returnState;
     }
+
 
 
 
@@ -174,7 +188,24 @@ public class Magpie
      */
     public String transformYouMeStatement(String statement)
     {
-        // your code here
-        return "";
-    }
-}
+        statement = statement.toLowerCase();
+        String response = " ";
+    if (statement.indexOf("you")>=0 && statement.indexOf("me")>=0){
+        if (statement.indexOf("me") > statement.indexOf("you")){
+        int lastWord = statement.indexOf("you") + 3;
+        String wanted = statement.substring(lastWord,statement.length()-3);
+        response = "What makes you think that I"+wanted+" you?";
+    }}
+    return response;}
+
+    public String transformHowDoYou(String statement)
+    {
+        statement = statement.toLowerCase();
+        String returnState = " ";
+        if (findWord(statement, "How do you" )>=0){
+            int lastWord = statement.indexOf("you") + 1;
+            String wanted = statement.substring(lastWord);
+            returnState = "I just" + wanted;
+        }
+        return returnState;
+    }}
